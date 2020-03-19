@@ -18,20 +18,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         else -> mapCurrentGameScore()
     }
 
-    private fun mapCurrentGameScore(): String {
-        var tempScore1: Int
-        var score1 = ""
-        for (i in 1..2) {
-            if (i == 1)
-                tempScore1 = m_score1
-            else {
-                score1 += "-"
-                tempScore1 = m_score2
-            }
-            score1 += mapPlayerScore(tempScore1)
-        }
-        return score1
-    }
+    private fun mapCurrentGameScore() = mapPlayerScore(m_score1) + "-" + mapPlayerScore(m_score2)
 
     private fun mapPlayerScore(playerScore: Int): String =
         when (playerScore) {
