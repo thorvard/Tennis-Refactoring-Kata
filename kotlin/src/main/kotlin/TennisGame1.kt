@@ -12,35 +12,35 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             m_score2 += 1
     }
 
-    override fun getScore(): String {
-        var score = ""
-        var tempScore = 0
-        if (isDraw()) {
-            return mapDrawMessage()
-        } else if (isAdvantageOrGamePoint()) {
-            return mapScoreToWinnerOrAdvantage()
-        } else {
-            for (i in 1..2) {
-                if (i == 1)
-                    tempScore = m_score1
-                else {
-                    score += "-"
-                    tempScore = m_score2
-                }
-                when (tempScore) {
-                    0 -> score += "Love"
-                    1 -> score += "Fifteen"
-                    2 -> score += "Thirty"
-                    3 -> score += "Forty"
-                }
+    override fun getScore() = when {
+        isDraw() -> mapDrawMessage()
+        isAdvantageOrGamePoint() -> mapScoreToWinnerOrAdvantage()
+        else -> mapCurrentGameScore()
+    }
+
+    private fun mapCurrentGameScore(): String {
+        var tempScore1: Int
+        var score1 = ""
+        for (i in 1..2) {
+            if (i == 1)
+                tempScore1 = m_score1
+            else {
+                score1 += "-"
+                tempScore1 = m_score2
+            }
+            when (tempScore1) {
+                0 -> score1 += "Love"
+                1 -> score1 += "Fifteen"
+                2 -> score1 += "Thirty"
+                3 -> score1 += "Forty"
             }
         }
-        return score
+        return score1
     }
 
     private fun mapScoreToWinnerOrAdvantage(): String {
         val scoreDifference = m_score1 - m_score2
-        return when(abs(m_score1 - m_score2)) {
+        return when (abs(m_score1 - m_score2)) {
             1 -> mapScoreToAdvantage(scoreDifference)
             else -> mapScoreToWinner(scoreDifference)
         }
