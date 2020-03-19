@@ -13,13 +13,8 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
     override fun getScore(): String {
         var score = ""
         var tempScore = 0
-        if (m_score1 == m_score2) {
-            when (m_score1) {
-                0 -> score = "Love-All"
-                1 -> score = "Fifteen-All"
-                2 -> score = "Thirty-All"
-                else -> score = "Deuce"
-            }
+        if (isDraw()) {
+            return mapDrawMessage(score)
         } else if (m_score1 >= 4 || m_score2 >= 4) {
             val minusResult = m_score1 - m_score2
             if (minusResult == 1)
@@ -47,5 +42,18 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             }
         }
         return score
+    }
+
+    private fun isDraw() = m_score1 == m_score2
+
+    private fun mapDrawMessage(score: String): String {
+        var score1 = score
+        when (m_score1) {
+            0 -> score1 = "Love-All"
+            1 -> score1 = "Fifteen-All"
+            2 -> score1 = "Thirty-All"
+            else -> score1 = "Deuce"
+        }
+        return score1
     }
 }
