@@ -28,15 +28,18 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
                 score1 += "-"
                 tempScore1 = m_score2
             }
-            when (tempScore1) {
-                0 -> score1 += "Love"
-                1 -> score1 += "Fifteen"
-                2 -> score1 += "Thirty"
-                3 -> score1 += "Forty"
-            }
+            score1 += mapPlayerScore(tempScore1)
         }
         return score1
     }
+
+    private fun mapPlayerScore(playerScore: Int): String =
+        when (playerScore) {
+            0 -> "Love"
+            1 -> "Fifteen"
+            2 -> "Thirty"
+            else -> "Forty"
+        }
 
     private fun mapScoreToWinnerOrAdvantage(): String {
         val scoreDifference = m_score1 - m_score2
