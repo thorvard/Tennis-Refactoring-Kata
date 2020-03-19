@@ -18,15 +18,17 @@ class TennisGame1 : TennisGame {
         else -> mapCurrentGameScore()
     }
 
-    private fun mapCurrentGameScore() = mapPlayerScore(scorePlayerOne) + "-" + mapPlayerScore(scorePlayerTwo)
+    private fun isDraw() = scorePlayerOne == scorePlayerTwo
 
-    private fun mapPlayerScore(playerScore: Int): String =
-        when (playerScore) {
-            0 -> "Love"
-            1 -> "Fifteen"
-            2 -> "Thirty"
-            else -> "Forty"
+    private fun mapDrawMessage() =
+        when (scorePlayerOne) {
+            0 -> "Love-All"
+            1 -> "Fifteen-All"
+            2 -> "Thirty-All"
+            else -> "Deuce"
         }
+
+    private fun isAdvantageOrGamePoint() = scorePlayerOne >= 4 || scorePlayerTwo >= 4
 
     private fun mapScoreToWinnerOrAdvantage(): String {
         val scoreDifference = scorePlayerOne - scorePlayerTwo
@@ -36,28 +38,25 @@ class TennisGame1 : TennisGame {
         }
     }
 
-    private fun mapScoreToWinner(scoreDifference: Int): String =
-        when {
-            scoreDifference >= 2 -> "Win for player1"
-            else -> "Win for player2"
-        }
-
     private fun mapScoreToAdvantage(scoreDifference: Int): String =
         when (scoreDifference) {
             1 -> "Advantage player1"
             else -> "Advantage player2"
         }
 
-    private fun isAdvantageOrGamePoint() = scorePlayerOne >= 4 || scorePlayerTwo >= 4
-
-    private fun isDraw() = scorePlayerOne == scorePlayerTwo
-
-    private fun mapDrawMessage(): String {
-        return when (scorePlayerOne) {
-            0 -> "Love-All"
-            1 -> "Fifteen-All"
-            2 -> "Thirty-All"
-            else -> "Deuce"
+    private fun mapScoreToWinner(scoreDifference: Int): String =
+        when {
+            scoreDifference >= 2 -> "Win for player1"
+            else -> "Win for player2"
         }
-    }
+
+    private fun mapCurrentGameScore() = mapPlayerScore(scorePlayerOne) + "-" + mapPlayerScore(scorePlayerTwo)
+
+    private fun mapPlayerScore(playerScore: Int): String =
+        when (playerScore) {
+            0 -> "Love"
+            1 -> "Fifteen"
+            2 -> "Thirty"
+            else -> "Forty"
+        }
 }
