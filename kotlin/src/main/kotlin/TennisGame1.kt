@@ -14,7 +14,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         var score = ""
         var tempScore = 0
         if (isDraw()) {
-            return mapDrawMessage(score)
+            return mapDrawMessage()
         } else if (m_score1 >= 4 || m_score2 >= 4) {
             val minusResult = m_score1 - m_score2
             if (minusResult == 1)
@@ -46,14 +46,12 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
 
     private fun isDraw() = m_score1 == m_score2
 
-    private fun mapDrawMessage(score: String): String {
-        var score1 = score
-        when (m_score1) {
-            0 -> score1 = "Love-All"
-            1 -> score1 = "Fifteen-All"
-            2 -> score1 = "Thirty-All"
-            else -> score1 = "Deuce"
+    private fun mapDrawMessage(): String {
+        return when(m_score1) {
+            0 -> "Love-All"
+            1 -> "Fifteen-All"
+            2 -> "Thirty-All"
+            else -> "Deuce"
         }
-        return score1
     }
 }
