@@ -1,15 +1,15 @@
 import kotlin.math.abs
 
-class TennisGame1(private val player1Name: String, private val player2Name: String) : TennisGame {
+class TennisGame1 : TennisGame {
 
-    private var m_score1: Int = 0
-    private var m_score2: Int = 0
+    private var scorePlayerOne: Int = 0
+    private var scorePlayerTwo: Int = 0
 
     override fun wonPoint(playerName: String) {
         if (playerName === "player1")
-            m_score1 += 1
+            scorePlayerOne += 1
         else
-            m_score2 += 1
+            scorePlayerTwo += 1
     }
 
     override fun getScore() = when {
@@ -18,7 +18,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         else -> mapCurrentGameScore()
     }
 
-    private fun mapCurrentGameScore() = mapPlayerScore(m_score1) + "-" + mapPlayerScore(m_score2)
+    private fun mapCurrentGameScore() = mapPlayerScore(scorePlayerOne) + "-" + mapPlayerScore(scorePlayerTwo)
 
     private fun mapPlayerScore(playerScore: Int): String =
         when (playerScore) {
@@ -29,8 +29,8 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         }
 
     private fun mapScoreToWinnerOrAdvantage(): String {
-        val scoreDifference = m_score1 - m_score2
-        return when (abs(m_score1 - m_score2)) {
+        val scoreDifference = scorePlayerOne - scorePlayerTwo
+        return when (abs(scorePlayerOne - scorePlayerTwo)) {
             1 -> mapScoreToAdvantage(scoreDifference)
             else -> mapScoreToWinner(scoreDifference)
         }
@@ -48,12 +48,12 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
             else -> "Advantage player2"
         }
 
-    private fun isAdvantageOrGamePoint() = m_score1 >= 4 || m_score2 >= 4
+    private fun isAdvantageOrGamePoint() = scorePlayerOne >= 4 || scorePlayerTwo >= 4
 
-    private fun isDraw() = m_score1 == m_score2
+    private fun isDraw() = scorePlayerOne == scorePlayerTwo
 
     private fun mapDrawMessage(): String {
-        return when (m_score1) {
+        return when (scorePlayerOne) {
             0 -> "Love-All"
             1 -> "Fifteen-All"
             2 -> "Thirty-All"
