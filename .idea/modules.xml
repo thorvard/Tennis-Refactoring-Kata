@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/java/Java.iml" filepath="$PROJECT_DIR$/java/Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Tennis-Refactoring-Kata.iml" filepath="$PROJECT_DIR$/.idea/Tennis-Refactoring-Kata.iml" />
     </modules>
   </component>
 </project>
-

@@ -18,7 +18,7 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         if (isDraw()) {
             return mapDrawMessage()
         } else if (isAdvantageOrGamePoint()) {
-            return checkResult()
+            return mapScoreToWinnerOrAdvantage()
         } else {
             for (i in 1..2) {
                 if (i == 1)
@@ -38,21 +38,21 @@ class TennisGame1(private val player1Name: String, private val player2Name: Stri
         return score
     }
 
-    private fun checkResult(): String {
+    private fun mapScoreToWinnerOrAdvantage(): String {
         val scoreDifference = m_score1 - m_score2
         return when(abs(m_score1 - m_score2)) {
-            1 -> checkAdvantage(scoreDifference)
-            else -> checkWinner(scoreDifference)
+            1 -> mapScoreToAdvantage(scoreDifference)
+            else -> mapScoreToWinner(scoreDifference)
         }
     }
 
-    private fun checkWinner(scoreDifference: Int): String =
+    private fun mapScoreToWinner(scoreDifference: Int): String =
         when {
             scoreDifference >= 2 -> "Win for player1"
             else -> "Win for player2"
         }
 
-    private fun checkAdvantage(scoreDifference: Int): String =
+    private fun mapScoreToAdvantage(scoreDifference: Int): String =
         when (scoreDifference) {
             1 -> "Advantage player1"
             else -> "Advantage player2"
